@@ -1,0 +1,12 @@
+replicaCount: 3
+
+image:
+  repository: abhishekjoshhi/fitness-tracker
+  tag: prod
+
+service:
+  type: LoadBalancer
+  port: 80
+
+mongodb:
+  image: mongo:7-jammy
