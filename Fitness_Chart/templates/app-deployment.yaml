@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: fitness-tracker-app
 spec:
-  replicas: 2
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: fitness-tracker-app
@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: fitness-tracker-app
-          image: pulkit197/fitness_tracker-master-copy3-fitness-app:latest
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
             - containerPort: 5000
           # ✔ All configMap vars removed
@@ -55,6 +55,6 @@ spec:
   selector:
     app: fitness-tracker-app
   ports:
-  - port: 80
+  - port: {{ .Values.service.port }}
     targetPort: 5000
-  type: LoadBalancer
+  type: {{ .Values.service.type }}
